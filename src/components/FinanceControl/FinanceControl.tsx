@@ -1,13 +1,11 @@
 import "./FinanceControl.css";
 
 
-const FinanceControl = (props: {
-    alertFunction: () => void
-
-}) => {
+const FinanceControl = () => {
     return(
-        <div>
-            <button onClick={props.alertFunction}>Exibir Alerta</button>    
+        <div className="container_finances">
+            {/* BALANCE */}
+            {/* EXPENSE */}
         </div>
     )
 };
