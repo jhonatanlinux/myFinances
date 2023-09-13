@@ -1,14 +1,13 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { BalanceProps } from "../../models/interfaces/BalanceProps/BalanceProps";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDollar } from "@fortawesome/free-solid-svg-icons";
-import "./Balance.css";
-import { updateCurrentUser } from "firebase/auth";
 import Button from "../Button/Button";
+import "./Balance.css";
 
 const Balance = ({ emitMovement, currentBalance }: BalanceProps) => {
   const [renderInputForm, setRenderInputForm] = useState(false);
-  const [isFormValid, setIsFormValid] = useState("");
+  const [isFormValid, setIsFormValid] = useState(false);
   const [inputName, setInputName] = useState("");
   const [inputValue, setInputValue] = useState("");
 
@@ -21,7 +20,7 @@ const Balance = ({ emitMovement, currentBalance }: BalanceProps) => {
     setInputValue("");
   };
 
-  const formSubmitHandler = (event: React.FormEvent<HTMLInputElement>) => {
+  const formSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (inputName.trim().length === 0 || inputValue.trim().length === 0) {
       setIsFormValid(false);
@@ -38,13 +37,20 @@ const Balance = ({ emitMovement, currentBalance }: BalanceProps) => {
   const handleInputNameForm = (event: React.FormEvent<HTMLInputElement>) => {
     const eventTarget = event.currentTarget as HTMLInputElement;
     const eventValue = eventTarget.value;
-    inputValue.trim().length > 0 ? setIsFormValid(true) : setIsFormValid(false);
+    inputName.trim().length > 0 ? setIsFormValid(true) : setIsFormValid(false);
     setInputName(eventValue);
-  }
+  };
+
+  const handleInputValueForm = (event: React.FormEvent<HTMLInputElement>) => {
+    const eventTarget = event.currentTarget as HTMLInputElement;
+    const eventValue = eventTarget.value;
+    inputValue.trim().length > 0 ? setIsFormValid(true) : setIsFormValid(false);
+    setInputValue(eventValue);
+  };
 
   return (
     <div>
-      <div className="balance_cantainer">
+      <div className="balance_container">
         <div className="balance_card">
           <header className="balance_header">
             <FontAwesomeIcon icon={faDollar} color="#7af1a7" size="2x" />
@@ -65,12 +71,31 @@ const Balance = ({ emitMovement, currentBalance }: BalanceProps) => {
                   !isFormValid ? "invalid" : ""
                 }`}
               >
-                  <input
-                    type="text"
-                    placeholder="Nome"
-                    className="balance_input"
-                    value={inputName}
-                    onChange={handleInputNameForm}/>
+                <input
+                  type="text"
+                  placeholder="Nome"
+                  className="balance_input"
+                  value={inputName}
+                  onChange={handleInputNameForm}
+                />
+                <input
+                  type="text"
+                  placeholder="Valor"
+                  className="balance_input"
+                  value={inputValue}
+                  onChange={handleInputValueForm}
+                />
+              </div>
+              <div className="actions_form_buttons_container">
+                <Button
+                  title="Cancelar"
+                  priority="Output"
+                  action={hideInputForm}
+                />
+                <Button
+                  title="Adicionar"
+                  priority="Input"
+                  type="submit"
                 />
               </div>
             </form>

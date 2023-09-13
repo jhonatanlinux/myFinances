@@ -6,7 +6,7 @@ import "./FinanceControl.css";
 const FinanceControl = ({
   handleSetMovement,
   balance,
-  expense,
+  expenses,
 }: FinanceControlProps) => {
   const receiveNewMovement = (movement: Movement) => {
     movement && handleSetMovement(movement);
