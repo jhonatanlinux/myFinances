@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDollar } from "@fortawesome/free-solid-svg-icons";
 import Button from "../Button/Button";
 import "./Balance.css";
+import { FormatMoney } from "../../utils/util";
 
 const Balance = ({ emitMovement, currentBalance }: BalanceProps) => {
   const [renderInputForm, setRenderInputForm] = useState(false);
@@ -54,9 +55,14 @@ const Balance = ({ emitMovement, currentBalance }: BalanceProps) => {
         <div className="balance_card">
           <header className="balance_header">
             <FontAwesomeIcon icon={faDollar} color="#7af1a7" size="2x" />
-            <h2>Saldo</h2>
+            <h2>SALDO</h2>
           </header>
-          <h3> {currentBalance > 0 ? currentBalance : "R$ 0"} </h3>
+          <h3>
+            {" "}
+            {currentBalance > 0
+              ? FormatMoney(String(currentBalance))
+              : "R$ 0"}{" "}
+          </h3>
           {!renderInputForm && (
             <Button
               action={handleRenderInputForm}
@@ -92,11 +98,7 @@ const Balance = ({ emitMovement, currentBalance }: BalanceProps) => {
                   priority="Output"
                   action={hideInputForm}
                 />
-                <Button
-                  title="Adicionar"
-                  priority="Input"
-                  type="submit"
-                />
+                <Button title="Adicionar" priority="Input" type="submit" />
               </div>
             </form>
           )}

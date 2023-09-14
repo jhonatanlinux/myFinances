@@ -4,6 +4,7 @@ import { ExpenseProps } from "../../models/interfaces/ExpenseProps/ExpenseProps"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPercent } from "@fortawesome/free-solid-svg-icons";
 import Button from "../Button/Button";
+import { FormatMoney } from "../../utils/util";
 
 const Expense = ({
   emitMovement,
@@ -62,9 +63,13 @@ const Expense = ({
         <div className="expense_card">
           <header className="expense_header">
             <FontAwesomeIcon icon={faPercent} color="#e43f4d" size="2x" />
-            <h2>Despesas</h2>
+            <h2>DESPESAS</h2>
           </header>
-          <h3>{currentExpenses > 0 ? currentExpenses : "R$ 0"}</h3>
+          <h3>
+            {currentExpenses > 0
+              ? FormatMoney(String(currentExpenses))
+              : "R$ 0"}
+          </h3>
           {!renderInputForm && (
             <Button
               action={handleRenderInputForm}
