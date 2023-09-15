@@ -138,55 +138,53 @@ const Balance = ({ emitMovement, currentBalance }: BalanceProps) => {
   };
 
   return (
-    <div>
-      <Container>
-        <Card>
-          <CardHeader>
-            <FontAwesomeIcon icon={faDollar} color="#7af1a7" size="2x" />
-            <h2>SALDO</h2>
-          </CardHeader>
-          <h3>
-            {" "}
-            {currentBalance > 0
-              ? FormatMoney(String(currentBalance))
-              : "R$ 0"}{" "}
-          </h3>
-          {!renderInputForm && (
-            <Button
-              action={handleRenderInputForm}
-              title="Entrada"
-              priority="Input"
-            />
-          )}
-          {renderInputForm && (
-            <form onSubmit={formSubmitHandler}>
-              <FormContainer invalid={!isFormValid}>
-                <FormInput
-                  type="text"
-                  placeholder="Nome"
-                  value={inputName}
-                  onChange={handleInputNameForm}
-                />
-                <FormInput
-                  type="text"
-                  placeholder="Valor"
-                  value={inputValue}
-                  onChange={handleInputValueForm}
-                />
-              </FormContainer>
-              <ActionsContainer>
-                <Button
-                  title="Cancelar"
-                  priority="Output"
-                  action={hideInputForm}
-                />
-                <Button title="Adicionar" priority="Input" type="submit" />
-              </ActionsContainer>
-            </form>
-          )}
-        </Card>
-      </Container>
-    </div>
+    <Container>
+      <Card>
+        <CardHeader>
+          <FontAwesomeIcon icon={faDollar} color="#7af1a7" size="2x" />
+          <h2>SALDO</h2>
+        </CardHeader>
+        <h3>
+          {" "}
+          {currentBalance > 0
+            ? FormatMoney(String(currentBalance))
+            : "R$ 0"}{" "}
+        </h3>
+        {!renderInputForm && (
+          <Button
+            action={handleRenderInputForm}
+            title="Entrada"
+            priority="Input"
+          />
+        )}
+        {renderInputForm && (
+          <form onSubmit={formSubmitHandler}>
+            <FormContainer invalid={!isFormValid}>
+              <FormInput
+                type="text"
+                placeholder="Nome"
+                value={inputName}
+                onChange={handleInputNameForm}
+              />
+              <FormInput
+                type="text"
+                placeholder="Valor"
+                value={inputValue}
+                onChange={handleInputValueForm}
+              />
+            </FormContainer>
+            <ActionsContainer>
+              <Button
+                title="Cancelar"
+                priority="Output"
+                action={hideInputForm}
+              />
+              <Button title="Adicionar" priority="Input" type="submit" />
+            </ActionsContainer>
+          </form>
+        )}
+      </Card>
+    </Container>
   );
 };
 

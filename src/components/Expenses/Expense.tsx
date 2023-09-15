@@ -4,7 +4,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPercent } from "@fortawesome/free-solid-svg-icons";
 import Button from "../Button/Button";
 import { FormatMoney } from "../../utils/util";
-import { ActionsContainer, Card, CardHeader, Container, FormContainer, FormInput } from "../Balance/Balance";
+import {
+  ActionsContainer,
+  Card,
+  CardHeader,
+  Container,
+  FormContainer,
+  FormInput,
+} from "../Balance/Balance";
 
 const Expense = ({
   emitMovement,
@@ -58,55 +65,51 @@ const Expense = ({
   };
 
   return (
-    <div>
-      <Container>
-        <Card>
-          <CardHeader>
-            <FontAwesomeIcon icon={faPercent} color="#e43f4d" size="2x" />
-            <h2>DESPESAS</h2>
-          </CardHeader>
-          <h3>
-            {currentExpenses > 0
-              ? FormatMoney(String(currentExpenses))
-              : "R$ 0"}
-          </h3>
-          {!renderInputForm && (
-            <Button
-              action={handleRenderInputForm}
-              title="Saída"
-              priority="Output"
-              disable={currentBalance === 0}
-            />
-          )}
-          {renderInputForm && (
-            <form onSubmit={formSubmitHandler}>
-              <FormContainer invalid={!isFormValid}>
-                <FormInput
-                  type="text"
-                  placeholder="Nome"
-                  value={inputName}
-                  onChange={handleInputNameForm}
-                />
-                <FormInput
-                  type="text"
-                  placeholder="Valor"
-                  value={inputValue}
-                  onChange={handleInputValueForm}
-                />
-              </FormContainer>
-              <ActionsContainer>
-                <Button
-                  title="Cancelar"
-                  priority="Output"
-                  action={hideInputForm}
-                />
-                <Button type="submit" title="Adicionar" priority="Input" />
-              </ActionsContainer>
-            </form>
-          )}
-        </Card>
-      </Container>
-    </div>
+    <Container>
+      <Card>
+        <CardHeader>
+          <FontAwesomeIcon icon={faPercent} color="#e43f4d" size="2x" />
+          <h2>DESPESAS</h2>
+        </CardHeader>
+        <h3>
+          {currentExpenses > 0 ? FormatMoney(String(currentExpenses)) : "R$ 0"}
+        </h3>
+        {!renderInputForm && (
+          <Button
+            action={handleRenderInputForm}
+            title="Saída"
+            priority="Output"
+            disable={currentBalance === 0}
+          />
+        )}
+        {renderInputForm && (
+          <form onSubmit={formSubmitHandler}>
+            <FormContainer invalid={!isFormValid}>
+              <FormInput
+                type="text"
+                placeholder="Nome"
+                value={inputName}
+                onChange={handleInputNameForm}
+              />
+              <FormInput
+                type="text"
+                placeholder="Valor"
+                value={inputValue}
+                onChange={handleInputValueForm}
+              />
+            </FormContainer>
+            <ActionsContainer>
+              <Button
+                title="Cancelar"
+                priority="Output"
+                action={hideInputForm}
+              />
+              <Button type="submit" title="Adicionar" priority="Input" />
+            </ActionsContainer>
+          </form>
+        )}
+      </Card>
+    </Container>
   );
 };
 
